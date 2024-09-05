@@ -40,7 +40,7 @@ function App() {
         const synth = new Tone.Synth().toDestination();
         const melody = ["C4", "E4", "G4", "C5"];
         melody.forEach((note, index) => {
-            synth.triggerAttackRelease(note, "8n", Tone.now() + index * 0.5);
+            synth.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
         });
     };
 
