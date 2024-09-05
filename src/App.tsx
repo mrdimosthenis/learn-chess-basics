@@ -20,6 +20,10 @@ function App() {
         }
     }, [chess]);
 
+    const handleSquareClick = (square: Square) => {
+        setArrows(prevArrows => prevArrows.filter(([_from, to]) => to !== square));
+    };
+
     return (
         <div className="App">
             <header className="App-header">
@@ -33,6 +37,7 @@ function App() {
                         customArrows={arrows}
                         arePiecesDraggable={false}
                         areArrowsAllowed={false}
+                        onSquareClick={handleSquareClick}
                     />
                 </div>
                 <a
