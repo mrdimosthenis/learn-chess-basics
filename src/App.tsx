@@ -31,6 +31,8 @@ function App() {
                     <Chessboard
                         position={chess.fen()}
                         customArrows={arrows}
+                        arePiecesDraggable={false}
+                        areArrowsAllowed={false}
                     />
                 </div>
                 <a
