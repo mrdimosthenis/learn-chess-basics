@@ -24,15 +24,13 @@ function App() {
 
     useEffect(() => {
         const moves = chess.moves({verbose: true});
-        if (moves.length > 0) {
-            const firstMove = moves[0];
-            const newArrows = moves
-                .filter(move => move.from === firstMove.from)
-                .map(move => [move.from, move.to] as [Square, Square]);
-            setArrows(newArrows);
-            const newTrackedSquares = new Set(newArrows.flat());
-            setTrackedSquares(newTrackedSquares);
-        }
+        const firstMove = moves[0];
+        const newArrows = moves
+            .filter(move => move.from === firstMove.from)
+            .map(move => [move.from, move.to] as [Square, Square]);
+        setArrows(newArrows);
+        const newTrackedSquares = new Set(newArrows.flat());
+        setTrackedSquares(newTrackedSquares);
     }, [chess]);
 
     const playMelody = async () => {
