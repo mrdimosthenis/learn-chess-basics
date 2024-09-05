@@ -19,6 +19,7 @@ function App() {
     const [arrows, setArrows] = useState<[Square, Square][]>([]);
     const [noteIndex, setNoteIndex] = useState(0);
     const [trackedSquares, setTrackedSquares] = useState<Set<Square>>(new Set());
+    const [isHoldState, setIsHoldState] = useState(false);
 
     useEffect(() => {
         const moves = chess.moves({verbose: true});
@@ -33,14 +34,31 @@ function App() {
         }
     }, [chess]);
 
+    const playMelody = async () => {
+        await Tone.start();
+        const synth = new Tone.Synth().toDestination();
+        const melody = ["C4", "E4", "G4", "C5"];
+        melody.forEach((note, index) => {
+            synth.triggerAttackRelease(note, "8n", Tone.now() + index * 0.5);
+        });
+    };
+
     const handleSquareClick = async (square: Square) => {
+        if (isHoldState) return;
+
         const newArrows = arrows.filter(([_from, to]) => to !== square);
         if (newArrows.length !== arrows.length) {
             setArrows(newArrows);
-            await Tone.start();
-            const synth = new Tone.Synth().toDestination();
-            synth.triggerAttackRelease(notes[noteIndex], "8n");
-            setNoteIndex((prevIndex) => (prevIndex + 1) % notes.length);
+            if (newArrows.length === 0) {
+                setIsHoldState(true);
+                await playMelody();
+                setTimeout(() => setIsHoldState(false), 2000);
+            } else {
+                await Tone.start();
+                const synth = new Tone.Synth().toDestination();
+                synth.triggerAttackRelease(notes[noteIndex], "8n");
+                setNoteIndex((prevIndex) => (prevIndex + 1) % notes.length);
+            }
         } else if (!trackedSquares.has(square)) {
             await Tone.start();
             const synth = new Tone.Synth().toDestination();
