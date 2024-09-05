@@ -4,6 +4,7 @@ import './App.css';
 
 import {Chess, Square} from 'chess.js';
 import {Chessboard} from 'react-chessboard';
+import * as Tone from 'tone';
 
 function App() {
     const [chess] = useState(new Chess());
@@ -20,8 +21,11 @@ function App() {
         }
     }, [chess]);
 
-    const handleSquareClick = (square: Square) => {
+    const handleSquareClick = async (square: Square) => {
         setArrows(prevArrows => prevArrows.filter(([_from, to]) => to !== square));
+        await Tone.start();
+        const synth = new Tone.Synth().toDestination();
+        synth.triggerAttackRelease("C4", "8n");
     };
 
     return (
