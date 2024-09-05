@@ -5,6 +5,7 @@ import './App.css';
 import {Chess, Square} from 'chess.js';
 import {Chessboard} from 'react-chessboard';
 import * as Tone from 'tone';
+import confetti from 'canvas-confetti';
 
 const notes = [
     "C3", "D3", "E3", "F3", "G3", "A3", "B3",
@@ -52,6 +53,7 @@ function App() {
             if (newArrows.length === 0) {
                 setIsHoldState(true);
                 await playMelody();
+                confetti();
                 setTimeout(() => setIsHoldState(false), 2000);
             } else {
                 await Tone.start();
