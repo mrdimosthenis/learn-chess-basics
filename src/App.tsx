@@ -23,9 +23,9 @@ function App() {
 
     useEffect(() => {
         const moves = chess.moves({verbose: true});
-        const firstMove = moves[0];
+        const randomMove = moves[Math.floor(Math.random() * moves.length)];
         const newArrows = moves
-            .filter(move => move.from === firstMove.from)
+            .filter(move => move.from === randomMove.from)
             .map(move => [move.from, move.to] as [Square, Square]);
         setArrows(newArrows);
         const newTrackedSquares = new Set(newArrows.flat());
