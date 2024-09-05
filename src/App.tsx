@@ -15,7 +15,7 @@ const notes = [
 ];
 
 function App() {
-    const [chess] = useState(new Chess());
+    const [chess, setChess] = useState(new Chess());
     const [arrows, setArrows] = useState<[Square, Square][]>([]);
     const [noteIndex, setNoteIndex] = useState(0);
     const [trackedSquares, setTrackedSquares] = useState<Set<Square>>(new Set());
@@ -51,7 +51,21 @@ function App() {
                 setIsHoldState(true);
                 await playMelody();
                 confetti();
-                setTimeout(() => setIsHoldState(false), 2000);
+
+                const lastArrow = arrows[arrows.length - 1];
+                chess.move({from: lastArrow[0], to: lastArrow[1]});
+
+                const newFen = chess.fen();
+
+                const newChess = new Chess(newFen);
+                setTrackedSquares(new Set());
+                setTimeout(() => {
+                    setIsHoldState(false);
+                    setArrows([]);
+                    setNoteIndex(0);
+                    setTrackedSquares(new Set());
+                    setChess(newChess);
+                }, 2000);
             } else {
                 await Tone.start();
                 const synth = new Tone.Synth().toDestination();
