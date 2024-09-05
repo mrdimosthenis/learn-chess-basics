@@ -56,7 +56,7 @@ function App() {
                 await Tone.start();
                 const synth = new Tone.Synth().toDestination();
                 synth.triggerAttackRelease(notes[noteIndex], "8n");
-                setNoteIndex((prevIndex) => (prevIndex + 1) % notes.length);
+                setNoteIndex((prevIndex) => prevIndex + 1);
             }
         } else if (!trackedSquares.has(square)) {
             await Tone.start();
