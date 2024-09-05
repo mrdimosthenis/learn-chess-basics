@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/learn-chess-basics/static/css/main.9008de97.css",
+    "main.js": "/learn-chess-basics/static/js/main.e7df38f2.js",
+    "static/js/453.51821291.chunk.js": "/learn-chess-basics/static/js/453.51821291.chunk.js",
+    "index.html": "/learn-chess-basics/index.html",
+    "main.9008de97.css.map": "/learn-chess-basics/static/css/main.9008de97.css.map",
+    "main.e7df38f2.js.map": "/learn-chess-basics/static/js/main.e7df38f2.js.map",
+    "453.51821291.chunk.js.map": "/learn-chess-basics/static/js/453.51821291.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9008de97.css",
+    "static/js/main.e7df38f2.js"
+  ]
+}
