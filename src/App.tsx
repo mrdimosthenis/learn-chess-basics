@@ -60,12 +60,10 @@ function App() {
                 }
                 const newFen = chess.fen();
                 const newChess = new Chess(newFen);
-                setTimeout(() => {
-                    setIsHoldState(false);
-                    setArrows([]);
-                    setNoteIndex(0);
-                    setChess(newChess);
-                }, 2000);
+                setIsHoldState(false);
+                setArrows([]);
+                setNoteIndex(0);
+                setChess(newChess);
             } else {
                 await Tone.start();
                 synthRef.current!.triggerAttackRelease(notes[noteIndex], "8n");
