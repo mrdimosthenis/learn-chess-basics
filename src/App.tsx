@@ -91,6 +91,7 @@ function App() {
                         arePiecesDraggable={false}
                         areArrowsAllowed={false}
                         onSquareClick={handleSquareClick}
+                        onDragOverSquare={handleSquareClick}
                         showBoardNotation={false}
                     />
                 </div>
