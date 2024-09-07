@@ -38,10 +38,11 @@ function App() {
 
     const playMelody = async () => {
         await Tone.start();
-        const melody = ["C4", "E4", "G4", "C5"];
-        melody.forEach((note, index) => {
-            synthRef.current!.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
-        });
+        notes
+            .filter((_, i) => i <= noteIndex)
+            .forEach((note, index) => {
+                synthRef.current!.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
+            });
     };
 
     const handleSquareClick = async (square: Square) => {
