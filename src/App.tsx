@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './App.css';
-
 import {Chess, Square} from 'chess.js';
 import {Chessboard} from 'react-chessboard';
 import * as Tone from 'tone';
@@ -21,6 +20,14 @@ function App() {
     const [trackedSquares, setTrackedSquares] = useState<Set<Square>>(new Set());
     const [isHoldState, setIsHoldState] = useState(false);
 
+    const synthRef = useRef<Tone.Synth | null>(null);
+
+    useEffect(() => {
+        if (!synthRef.current) {
+            synthRef.current = new Tone.Synth().toDestination();
+        }
+    }, []);
+
     useEffect(() => {
         const moves = chess.moves({verbose: true});
         const randomMove = moves[Math.floor(Math.random() * moves.length)];
@@ -34,16 +41,14 @@ function App() {
 
     const playMelody = async () => {
         await Tone.start();
-        const synth = new Tone.Synth().toDestination();
         const melody = ["C4", "E4", "G4", "C5"];
         melody.forEach((note, index) => {
-            synth.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
+            synthRef.current!.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
         });
     };
 
     const handleSquareClick = async (square: Square) => {
         if (isHoldState) return;
-
         const newArrows = arrows.filter(([_from, to]) => to !== square);
         if (newArrows.length !== arrows.length) {
             setArrows(newArrows);
@@ -67,14 +72,12 @@ function App() {
                 }, 2000);
             } else {
                 await Tone.start();
-                const synth = new Tone.Synth().toDestination();
-                synth.triggerAttackRelease(notes[noteIndex], "8n");
+                synthRef.current!.triggerAttackRelease(notes[noteIndex], "8n");
                 setNoteIndex((prevIndex) => prevIndex + 1);
             }
         } else if (!trackedSquares.has(square)) {
             await Tone.start();
-            const synth = new Tone.Synth().toDestination();
-            synth.triggerAttackRelease("C2", "8n");
+            synthRef.current!.triggerAttackRelease("C2", "8n");
         }
     };
 
