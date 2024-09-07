@@ -91,6 +91,7 @@ function App() {
                         arePiecesDraggable={false}
                         areArrowsAllowed={false}
                         onSquareClick={handleSquareClick}
+                        showBoardNotation={false}
                     />
                 </div>
             </header>
