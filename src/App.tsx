@@ -50,13 +50,12 @@ function App() {
             if (newArrows.length === 0) {
                 setIsHoldState(true);
                 await playMelody();
-                confetti();
-
                 const lastArrow = arrows[arrows.length - 1];
-                chess.move({from: lastArrow[0], to: lastArrow[1]});
-
+                const move = chess.move({from: lastArrow[0], to: lastArrow[1]});
+                if (move && move.captured) {
+                    confetti();
+                }
                 const newFen = chess.fen();
-
                 const newChess = new Chess(newFen);
                 setTrackedSquares(new Set());
                 setTimeout(() => {
