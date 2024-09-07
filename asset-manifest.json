@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/learn-chess-basics/static/css/main.9008de97.css",
-    "main.js": "/learn-chess-basics/static/js/main.67b13c35.js",
+    "main.css": "/learn-chess-basics/static/css/main.4b970229.css",
+    "main.js": "/learn-chess-basics/static/js/main.af7e6d4c.js",
     "static/js/453.51821291.chunk.js": "/learn-chess-basics/static/js/453.51821291.chunk.js",
     "index.html": "/learn-chess-basics/index.html",
-    "main.9008de97.css.map": "/learn-chess-basics/static/css/main.9008de97.css.map",
-    "main.67b13c35.js.map": "/learn-chess-basics/static/js/main.67b13c35.js.map",
+    "main.4b970229.css.map": "/learn-chess-basics/static/css/main.4b970229.css.map",
+    "main.af7e6d4c.js.map": "/learn-chess-basics/static/js/main.af7e6d4c.js.map",
     "453.51821291.chunk.js.map": "/learn-chess-basics/static/js/453.51821291.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9008de97.css",
-    "static/js/main.67b13c35.js"
+    "static/css/main.4b970229.css",
+    "static/js/main.af7e6d4c.js"
   ]
 }
