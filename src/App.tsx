@@ -17,7 +17,6 @@ function App() {
     const [chess, setChess] = useState(new Chess());
     const [arrows, setArrows] = useState<[Square, Square][]>([]);
     const [noteIndex, setNoteIndex] = useState(0);
-    const [trackedSquares, setTrackedSquares] = useState<Set<Square>>(new Set());
     const [isHoldState, setIsHoldState] = useState(false);
 
     const synthRef = useRef<Tone.Synth | null>(null);
@@ -35,8 +34,6 @@ function App() {
             .filter(move => move.from === randomMove.from)
             .map(move => [move.from, move.to] as [Square, Square]);
         setArrows(newArrows);
-        const newTrackedSquares = new Set(newArrows.flat());
-        setTrackedSquares(newTrackedSquares);
     }, [chess]);
 
     const playMelody = async () => {
@@ -62,12 +59,10 @@ function App() {
                 }
                 const newFen = chess.fen();
                 const newChess = new Chess(newFen);
-                setTrackedSquares(new Set());
                 setTimeout(() => {
                     setIsHoldState(false);
                     setArrows([]);
                     setNoteIndex(0);
-                    setTrackedSquares(new Set());
                     setChess(newChess);
                 }, 2000);
             } else {
@@ -75,9 +70,6 @@ function App() {
                 synthRef.current!.triggerAttackRelease(notes[noteIndex], "8n");
                 setNoteIndex((prevIndex) => prevIndex + 1);
             }
-        } else if (!trackedSquares.has(square)) {
-            await Tone.start();
-            synthRef.current!.triggerAttackRelease("C2", "8n");
         }
     };
 
