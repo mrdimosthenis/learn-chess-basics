@@ -51,7 +51,7 @@ function App() {
                 setIsHoldState(true);
                 await playMelody();
                 const lastArrow = arrows[arrows.length - 1];
-                const move = chess.move({from: lastArrow[0], to: lastArrow[1]});
+                const move = chess.move({from: lastArrow[0], to: lastArrow[1], promotion: 'q'});
                 if (move && move.captured) {
                     confetti();
                 }
