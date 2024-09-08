@@ -60,12 +60,6 @@ This project is a fun and interactive React application designed to help users l
 3. When a valid move is made, a musical note from the Kalinka melody plays using `Tone.js`.
 4. On checkmate, the board is reset and a confetti effect is triggered to celebrate the victory.
 
-## Future Improvements
-
-- Add more chess learning tools, such as basic tactics or puzzles.
-- Include visual feedback for check and checkmate status on the board.
-- Add a visual representation of the Kalinka melody to better tie the music to the game.
-
 ## License
 
 This project is open-source and available under the MIT License.
