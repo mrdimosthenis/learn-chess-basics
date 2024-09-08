@@ -50,7 +50,7 @@ function App() {
                 setIsHoldState(true);
                 const lastArrow = arrows[arrows.length - 1];
                 const move = chess.move({from: lastArrow[0], to: lastArrow[1], promotion: 'q'});
-                if (move && move.captured) {
+                if (move && chess.isCheckmate()) {
                     confetti();
                 }
                 const newFen = chess.fen();
