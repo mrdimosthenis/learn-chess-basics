@@ -36,23 +36,18 @@ function App() {
         setArrows(newArrows);
     }, [chess]);
 
-    const playMelody = async () => {
-        await Tone.start();
-        notes
-            .filter((_, i) => i <= noteIndex)
-            .forEach((note, index) => {
-                synthRef.current!.triggerAttackRelease(note, "8n", Tone.now() + index * 0.1);
-            });
-    };
-
     const handleSquareClick = async (square: Square) => {
         if (isHoldState) return;
         const newArrows = arrows.filter(([_from, to]) => to !== square);
         if (newArrows.length !== arrows.length) {
             setArrows(newArrows);
+
+            await Tone.start();
+            synthRef.current!.triggerAttackRelease(notes[noteIndex % notes.length], "8n");
+            setNoteIndex((prevIndex) => prevIndex + 1);
+
             if (newArrows.length === 0) {
                 setIsHoldState(true);
-                await playMelody();
                 const lastArrow = arrows[arrows.length - 1];
                 const move = chess.move({from: lastArrow[0], to: lastArrow[1], promotion: 'q'});
                 if (move && move.captured) {
@@ -62,12 +57,7 @@ function App() {
                 const newChess = new Chess(newFen);
                 setIsHoldState(false);
                 setArrows([]);
-                setNoteIndex(0);
                 setChess(newChess);
-            } else {
-                await Tone.start();
-                synthRef.current!.triggerAttackRelease(notes[noteIndex], "8n");
-                setNoteIndex((prevIndex) => prevIndex + 1);
             }
         }
     };
