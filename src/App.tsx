@@ -5,13 +5,40 @@ import {Chessboard} from 'react-chessboard';
 import * as Tone from 'tone';
 import confetti from 'canvas-confetti';
 
-const notes = [
-    "C4", "D4", "E4", "F4", "G4", "A4", "B4",
-    "C5", "D5", "E5", "F5", "G5", "A5", "B5",
-    "C6", "D6", "E6", "F6", "G6", "A6", "B6",
-    "C7", "D7", "E7", "F7", "G7", "A7", "B7",
-    "C8", "D8", "E8", "F8", "G8", "A8", "B8"
+const kalinka = [
+    "E4", "D4",
+    "B3", "C4", "D4",
+    "B3", "C4", "D4",
+    "C4", "B3", "A3",
+
+    "E4", "E4", "D4",
+    "C4", "B3", "C4", "D4",
+    "B3", "C4", "D4",
+    "C4", "B3", "A3",
+
+    "E4", "D4",
+    "B3", "C4", "D4",
+    "B3", "C4", "D4",
+    "C4", "B3", "A3",
+
+    "E4", "E4", "D4",
+    "C4", "B3", "C4", "D4",
+    "B3", "C4", "D4",
+    "C4", "B3", "A3",
+
+    "G3",
+
+    "E4", "G4", "F4", "E4", "D4", "C4", "G3",
+    "E4", "G4", "F4", "E4", "D4", "C4", "G3",
+
+    "A3", "B3", "D4", "C4", "B3", "A3", "G3", "F3", "E3",
+
+    "E4", "G4", "F4", "E4", "D4", "C4", "G3",
+    "E4", "G4", "F4", "E4", "D4", "C4", "G3",
+
+    "A3", "B3", "D4", "C4", "B3", "A3", "G3", "F3", "E3"
 ];
+
 
 function App() {
     const [chess, setChess] = useState(new Chess());
@@ -43,7 +70,7 @@ function App() {
             setArrows(newArrows);
 
             await Tone.start();
-            synthRef.current!.triggerAttackRelease(notes[noteIndex % notes.length], "8n");
+            synthRef.current!.triggerAttackRelease(kalinka[noteIndex % kalinka.length], "8n");
             setNoteIndex((prevIndex) => prevIndex + 1);
 
             if (newArrows.length === 0) {
